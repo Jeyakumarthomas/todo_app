@@ -1,19 +1,12 @@
-import React,{useState,useRef} from 'react';
+import React,{useState,useRef,useEffect} from 'react';
 import TodoItem from './TodoItem';
 
 const Todo = () => {
-  const [todoList,setTodoList] = useState([
-  {
-    id:123,
-    text:'readBooks',
-    isComplete:true
-  },
-  {
-    id:456,
-    text:'writingBooks',
-    isComplete:false
-  }
-]);
+  const [todoList,setTodoList] = useState(localStorage.getItem('todos')?JSON.parse(localStorage.getItem('todos')):[]);
+
+//updating localStorage
+useEffect(()=>{localStorage.setItem('todos',JSON.stringify(todoList))},[todoList])
+
 // Add new tasks
 const inputRef = useRef();
 const addTask = () => {
