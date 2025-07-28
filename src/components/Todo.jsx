@@ -44,6 +44,15 @@ const toggleTask = (id) => {
   })
 }
 
+// Deleting Tasks
+
+const deleteTodo = (id) => {
+  setTodoList((prev)=>{
+    return prev.filter((todo)=>todo.id!==id)
+  })
+}
+
+
   return (
   <>
     <div className="w-[30-rem]">
@@ -62,7 +71,7 @@ const toggleTask = (id) => {
         <legend className='text-pink-600 font-medium '>List of tasks</legend>
         {/* list items */}
         
-        {todoList.length === 0?(<p classList="text-gray-500 text-sm">No task found</p>):(todoList.map((todo,index)=>{return <TodoItem text={todo.text} key={index} isComplete={todo.isComplete} id={todo.id} toggleTask={toggleTask}/>}))}
+        {todoList.length === 0?(<p classList="text-gray-500 text-sm">No task found</p>):(todoList.map((todo,index)=>{return <TodoItem text={todo.text} key={index} isComplete={todo.isComplete} id={todo.id} toggleTask={toggleTask} deleteTodo={deleteTodo}/>}))}
         
         {/* list items */}
       </fieldset>
