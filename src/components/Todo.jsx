@@ -14,7 +14,7 @@ const Todo = () => {
     isComplete:false
   }
 ]);
-
+// Add new tasks
 const inputRef = useRef();
 const addTask = () => {
   const inputText = inputRef.current.value.trim();
@@ -30,6 +30,19 @@ const addTask = () => {
   setTodoList((prev)=>[...prev,newTodo])
   inputRef.current.value = ""
 };
+
+//Updating task status
+const toggleTask = (id) => {
+  setTodoList((prev)=>{
+    return prev.map((todo)=>
+    {
+      if(id==todo.id){
+        return {...todo,isComplete:!todo.isComplete}
+      }
+      return todo;
+    })
+  })
+}
 
   return (
   <>
@@ -48,8 +61,9 @@ const addTask = () => {
       <fieldset className='space-y-3'>
         <legend className='text-pink-600 font-medium '>List of tasks</legend>
         {/* list items */}
-        {/* <TodoItem text='Reading Books'/>*/}
-        {todoList.length === 0?(<p classList="text-gray-500 text-sm">No task found</p>):(todoList.map((todo,index)=>{return <TodoItem text={todo.text} key={index} isComplete={todo.isComplete} id={todo.id}/>}))}
+        
+        {todoList.length === 0?(<p classList="text-gray-500 text-sm">No task found</p>):(todoList.map((todo,index)=>{return <TodoItem text={todo.text} key={index} isComplete={todo.isComplete} id={todo.id} toggleTask={toggleTask}/>}))}
+        
         {/* list items */}
       </fieldset>
     </div>
